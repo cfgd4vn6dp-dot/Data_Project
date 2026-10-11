@@ -1,0 +1,92 @@
+# Employee Attrition Analysis Project
+
+## Deliverable 1: Data Cleaning & Preparation Report
+
+### 1. Dataset Overview & Audit
+- Initial Shape: 1,470 rows, 35 columns
+- Total Missing Values: 0
+- Total Duplicate Rows: 0
+
+### 2. Redundant Columns Removed
+The following columns were dropped because they have zero variance or are arbitrary identifiers:
+- EmployeeCount (equal to 1 for all rows)
+- Over18 (equal to 'Y' for all rows)
+- StandardHours (equal to 80 for all rows)
+- EmployeeNumber (arbitrary identifier)
+
+### 3. Feature Engineering
+- Attrition_Flag: Encoded Attrition into numeric (1 for Yes, 0 for No).
+- AgeGroup: Binned into '18-25', '26-35', '36-45', '46+'.
+- SalarySlab: Binned MonthlyIncome into '<3k', '3k-6k', '6k-10k', '10k+'.
+- TenureBand: Binned YearsAtCompany into '0-2 yrs', '3-5 yrs', '6-10 yrs', '10+ yrs'.
+
+### 4. Output Files Created
+- cleaned_employee_attrition.csv: 1,470 rows, 35 columns (ready for dashboard).
+- Data_Dictionary.csv: Metadata for all columns.
+
+---
+
+## Deliverable 2: Exploratory Data Analysis (EDA) Report
+
+### 1. Key Performance Indicators (KPIs)
+- Total Headcount: 1,470
+- Stayed Employees: 1,233 (83.88%)
+- Exited Employees: 237 (16.12%)
+- Overall Turnover Rate: 16.12%
+
+### 2. Leavers vs. Stayers Profile
+- Monthly Income: Leavers earn $4,787.09 vs. $6,832.74 for Stayers (~30% less).
+- Company Tenure: Leavers average 5.13 years vs. 7.37 years for Stayers.
+- Average Age: Leavers average 33.61 years vs. 37.56 years for Stayers.
+- Years in Current Role: Leavers average 2.90 years vs. 4.48 years for Stayers.
+
+### 3. Key Turnover Drivers
+1. Overtime:
+   - OverTime = Yes: 30.53% Attrition Rate (127 exits / 416 employees)
+   - OverTime = No: 10.44% Attrition Rate (110 exits / 1,054 employees)
+   - Conclusion: Overtime employees are ~3x more likely to leave.
+
+2. Monthly Compensation:
+   - Low (<$3k): 28.61% Attrition Rate (113 exits)
+   - Medium ($3k-$6k): 12.72% Attrition Rate (66 exits)
+   - High ($6k-$10k): 12.00% Attrition Rate (33 exits)
+   - Executive (>$10k): 8.90% Attrition Rate (25 exits)
+   - Conclusion: Turnover drops sharply once salary exceeds $3,000.
+
+3. Work-Life Balance:
+   - Level 1 (Poor): 31.25% Attrition Rate
+   - Level 2: 16.86% Attrition Rate
+   - Level 3: 14.22% Attrition Rate
+   - Level 4: 17.65% Attrition Rate
+
+### 4. Segment Breakdown
+- High-Risk Job Roles:
+  * Sales Representative: 39.76% (33 exits / 83 employees)
+  * Laboratory Technician: 23.94% (62 exits / 259 employees)
+  * Human Resources: 23.08% (12 exits / 52 employees)
+- Low-Risk Job Roles:
+  * Research Director: 2.50%
+  * Manager: 4.90%
+- Department Turnover:
+  * Sales: 20.63%
+  * Human Resources: 19.05%
+  * Research & Development: 13.84%
+- Age Demographics:
+  * 18-25: 35.77% Attrition Rate (highest risk)
+  * 26-35: 19.14%
+  * 46+: 12.45%
+  * 36-45: 9.19% (most stable)
+
+---
+
+## Deliverable 4: Business Insights & Recommendations
+
+1. Overtime Cap & Burnout Management:
+   - Restrict mandatory overtime hours, specifically in high-risk departments (Sales and Laboratory).
+   - Provide compensatory off-days or overtime premiums.
+
+2. Compensation Restructuring for Entry-Level Roles:
+   - Review market benchmark salaries for Sales Representatives and Lab Technicians earning under $3,000/month.
+
+3. Early-Career Mentorship:
+   - Implement structured 90-day and 1-year career pathing reviews for hires aged 18-25 and employees with under 2 years of tenure.
